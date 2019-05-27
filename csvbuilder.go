@@ -30,7 +30,7 @@ import (
 */
 
 //ParseFiles ParseFiles
-func ParseFiles(dir string) *SourceFiles {
+func (b *CsvFileBuilder) ParseFiles(dir string) *SourceFiles {
 	var rtn SourceFiles
 	//fmt.Println(dir)
 	res := readFileDir(dir)

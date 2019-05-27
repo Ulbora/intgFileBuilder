@@ -22,10 +22,11 @@ package filebuilder
 
 //Builder FileBuilder
 type Builder interface {
-	ParseFiles(dir string)
-	readFile(name string) (*[]byte, error)
-	saveFile(name string) bool
-	readDir(dir string)
+	ParseFiles(dir string) *SourceFiles
+}
+
+//CsvFileBuilder CsvFileBuilder
+type CsvFileBuilder struct {
 }
 
 //SupplierFile SupplierFile

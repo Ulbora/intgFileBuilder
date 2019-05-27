@@ -7,10 +7,13 @@ import (
 )
 
 func TestParseFiles(t *testing.T) {
-	files := ParseFiles("./testdir")
+	var b Builder
+	var cb CsvFileBuilder
+	b = &cb
+	files := b.ParseFiles("./testdir")
+	fmt.Println("source files in parse files", files.Files[0].Content[0])
 	fmt.Println("files len in parse files: ", len(files.Files))
-	fmt.Println("source files in parse files", files)
-	if len(files.Files) != 4 {
+	if len(files.Files) < 4 {
 		t.Fail()
 	}
 }
