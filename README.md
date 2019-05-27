@@ -1,4 +1,4 @@
-# dcIntegration
+# intgFileBuilder
 
 
 [![Build Status](https://travis-ci.org/Ulbora/intgFileBuilder.svg?branch=master)](https://travis-ci.org/Ulbora/intgFileBuilder)
