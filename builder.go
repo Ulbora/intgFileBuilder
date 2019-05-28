@@ -23,10 +23,12 @@ package filebuilder
 //Builder FileBuilder
 type Builder interface {
 	ParseFiles(dir string) *SourceFiles
+	SaveCartFile(file CartCsvFile) bool
 }
 
 //CsvFileBuilder CsvFileBuilder
 type CsvFileBuilder struct {
+	OutputDir string
 }
 
 //SupplierFile SupplierFile
@@ -50,4 +52,11 @@ type Sourcefile struct {
 //SourceFiles SourceFiles
 type SourceFiles struct {
 	Files []Sourcefile
+}
+
+//CartCsvFile CartCsvFile
+type CartCsvFile struct {
+	SupplierDir string
+	FileName    string
+	Content     [][]string
 }

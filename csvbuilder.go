@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
 	"path/filepath"
 	"strings"
 )
@@ -49,6 +50,25 @@ func (b *CsvFileBuilder) ParseFiles(dir string) *SourceFiles {
 	}
 	return &rtn
 }
+
+//SaveCartFile SaveCartFile
+func (b *CsvFileBuilder) SaveCartFile(file CartCsvFile) bool {
+	var rtn = false
+	var fileName = b.OutputDir + string(filepath.Separator) + file.SupplierDir + string(filepath.Separator) + file.FileName
+	fmt.Println("output file: ", fileName)
+	var path = b.OutputDir + string(filepath.Separator) + file.SupplierDir
+	createDir(path)
+	f, err := createFile(fileName)
+	if err == nil {
+		defer f.Close()
+		w := csv.NewWriter(f)
+		w.WriteAll(file.Content)
+		logWriteAllError(w)
+		rtn = true
+	}
+	return rtn
+}
+
 func readFileDir(dir string) *[]SupplierDir {
 	var rtn []SupplierDir
 	//fmt.Println("dir: ", dir)
@@ -103,4 +123,31 @@ func csvReader(r *csv.Reader) [][]string {
 		log.Println("csv error: ", err)
 	}
 	return records
+}
+
+func createFile(fileName string) (*os.File, error) {
+	f, err := os.Create(fileName)
+	if err != nil {
+		log.Println("file create err: ", err)
+	}
+	return f, err
+}
+
+func createDir(path string) bool {
+	var rtn = false
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		os.Mkdir(path, os.ModePerm)
+		rtn = true
+	}
+	return rtn
+}
+
+func logWriteAllError(w *csv.Writer) bool {
+	var rtn = false
+	//fmt.Println("w err: ", w.Error())
+	if err := w.Error(); err != nil {
+		log.Println("error writing csv:", err)
+		rtn = true
+	}
+	return rtn
 }
