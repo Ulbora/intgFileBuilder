@@ -6,30 +6,42 @@ import (
 	"testing"
 )
 
-func TestParseFiles(t *testing.T) {
+// func TestParseFiles(t *testing.T) {
+// 	var b Builder
+// 	var cb CsvFileBuilder
+// 	b = &cb
+// 	files := b.ParseFiles("./testdir")
+// 	//fmt.Println("source files in parse files", files.Files[0].Content[0])
+// 	fmt.Println("files len in parse files: ", len(files.Files))
+// 	if len(files.Files) < 4 {
+// 		t.Fail()
+// 	}
+// }
+
+func TestAllSupplierDirs(t *testing.T) {
 	var b Builder
 	var cb CsvFileBuilder
 	b = &cb
-	files := b.ParseFiles("./testdir")
-	fmt.Println("source files in parse files", files.Files[0].Content[0])
-	fmt.Println("files len in parse files: ", len(files.Files))
-	if len(files.Files) < 4 {
-		t.Fail()
-	}
-}
-
-func TestReadFileDir(t *testing.T) {
-	res := readFileDir("./testdir")
+	res := b.ReadAllSupplierDirs("./testdir")
 	if (*res)[0].Name != "test1" {
 		t.Fail()
 	}
 	if (*res)[0].Files[0].FullName != "./testdir/test1/test11.csv" {
 		t.Fail()
 	}
+	fcont := b.ReadSourceFile((*res)[0].Files[0].FullName)
+	fmt.Println("len: ", len(fcont))
+	if len(fcont) == 0 {
+		t.Fail()
+	}
+	//fmt.Println("source file in TestAllSupplierDirs", fcont)
 }
 
-func TestReadFile(t *testing.T) {
-	res := readSourceFile("./testdir/test1/test11.csv")
+func TestReadSourceFile(t *testing.T) {
+	var b Builder
+	var cb CsvFileBuilder
+	b = &cb
+	res := b.ReadSourceFile("./testdir/test1/test11.csv")
 	fmt.Println("len: ", len(res))
 	if len(res) == 0 {
 		t.Fail()
@@ -38,7 +50,10 @@ func TestReadFile(t *testing.T) {
 }
 
 func TestReadFileBadFile(t *testing.T) {
-	res := readSourceFile("./testdir/test1/test11_bad.csv")
+	var b Builder
+	var cb CsvFileBuilder
+	b = &cb
+	res := b.ReadSourceFile("./testdir/test1/test11_bad.csv")
 	fmt.Println("len: ", len(res))
 	if len(res) != 0 {
 		t.Fail()
@@ -61,11 +76,14 @@ func TestSaveCartFile(t *testing.T) {
 	var cb CsvFileBuilder
 	cb.OutputDir = "./cartFileTest"
 	b = &cb
-	files := b.ParseFiles("./testdir")
+	files := b.ReadAllSupplierDirs("./testdir")
+	fmt.Println("AllSupplierDirs: ", files)
+	fcont := b.ReadSourceFile((*files)[0].Files[0].FullName)
 	var cf CartCsvFile
 	cf.SupplierDir = "test1"
-	cf.FileName = files.Files[0].Name
-	cf.Content = files.Files[0].Content
+	cf.FileName = (*files)[0].Files[0].Name
+	cf.Content = fcont
+	fmt.Println("CartCsvFile: ", cf)
 	// var cb CsvFileBuilder
 	suc := b.SaveCartFile(cf)
 	if suc != true {

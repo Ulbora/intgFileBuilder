@@ -1,12 +1,8 @@
 mode: set
-github.com/Ulbora/intgFileBuilder/csvbuilder.go:34.62,39.29 3 1
-github.com/Ulbora/intgFileBuilder/csvbuilder.go:51.2,51.13 1 1
-github.com/Ulbora/intgFileBuilder/csvbuilder.go:39.29,41.36 1 1
-github.com/Ulbora/intgFileBuilder/csvbuilder.go:41.36,49.4 6 1
 github.com/Ulbora/intgFileBuilder/csvbuilder.go:55.62,62.16 7 1
 github.com/Ulbora/intgFileBuilder/csvbuilder.go:69.2,69.12 1 1
 github.com/Ulbora/intgFileBuilder/csvbuilder.go:62.16,68.3 5 1
-github.com/Ulbora/intgFileBuilder/csvbuilder.go:72.45,76.16 3 1
+github.com/Ulbora/intgFileBuilder/csvbuilder.go:72.73,76.16 3 1
 github.com/Ulbora/intgFileBuilder/csvbuilder.go:106.2,106.13 1 1
 github.com/Ulbora/intgFileBuilder/csvbuilder.go:76.16,77.30 1 1
 github.com/Ulbora/intgFileBuilder/csvbuilder.go:85.3,85.27 1 1
@@ -17,7 +13,7 @@ github.com/Ulbora/intgFileBuilder/csvbuilder.go:101.4,101.28 1 1
 github.com/Ulbora/intgFileBuilder/csvbuilder.go:90.18,91.34 1 1
 github.com/Ulbora/intgFileBuilder/csvbuilder.go:91.34,92.24 1 1
 github.com/Ulbora/intgFileBuilder/csvbuilder.go:92.24,98.7 4 1
-github.com/Ulbora/intgFileBuilder/csvbuilder.go:109.45,111.16 2 1
+github.com/Ulbora/intgFileBuilder/csvbuilder.go:109.65,111.16 2 1
 github.com/Ulbora/intgFileBuilder/csvbuilder.go:114.2,117.16 3 1
 github.com/Ulbora/intgFileBuilder/csvbuilder.go:111.16,113.3 1 1
 github.com/Ulbora/intgFileBuilder/csvbuilder.go:120.42,122.16 2 1

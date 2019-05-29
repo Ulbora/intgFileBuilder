@@ -22,7 +22,9 @@ package filebuilder
 
 //Builder FileBuilder
 type Builder interface {
-	ParseFiles(dir string) *SourceFiles
+	//ParseFiles(dir string) *SourceFiles
+	ReadAllSupplierDirs(dir string) *[]SupplierDir
+	ReadSourceFile(file string) [][]string
 	SaveCartFile(file CartCsvFile) bool
 }
 

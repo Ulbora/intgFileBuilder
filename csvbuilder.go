@@ -31,25 +31,25 @@ import (
 */
 
 //ParseFiles ParseFiles
-func (b *CsvFileBuilder) ParseFiles(dir string) *SourceFiles {
-	var rtn SourceFiles
-	//fmt.Println(dir)
-	res := readFileDir(dir)
-	//fmt.Println("parser res: ", res)
-	for _, sfile := range *res {
-		//fmt.Println("files in parserfile", sfile)
-		for _, file := range sfile.Files {
-			fmt.Println("source file in parserfile", file)
-			sourceFileContent := readSourceFile(file.FullName)
-			var sf Sourcefile
-			sf.Name = file.Name
-			sf.Content = sourceFileContent
-			rtn.Files = append(rtn.Files, sf)
-			//fmt.Println("source file in read file", sourceFileContent)
-		}
-	}
-	return &rtn
-}
+// func (b *CsvFileBuilder) ParseFiles(dir string) *SourceFiles {
+// 	var rtn SourceFiles
+// 	//fmt.Println(dir)
+// 	res := b.ReadAllSupplierDirs(dir)
+// 	//fmt.Println("parser res: ", res)
+// 	for _, sfile := range *res {
+// 		//fmt.Println("files in parserfile", sfile)
+// 		for _, file := range sfile.Files {
+// 			fmt.Println("source file in parserfile", file)
+// 			sourceFileContent := b.ReadSourceFile(file.FullName)
+// 			var sf Sourcefile
+// 			sf.Name = file.Name
+// 			sf.Content = sourceFileContent
+// 			rtn.Files = append(rtn.Files, sf)
+// 			//fmt.Println("source file in read file", sourceFileContent)
+// 		}
+// 	}
+// 	return &rtn
+// }
 
 //SaveCartFile SaveCartFile
 func (b *CsvFileBuilder) SaveCartFile(file CartCsvFile) bool {
@@ -69,7 +69,7 @@ func (b *CsvFileBuilder) SaveCartFile(file CartCsvFile) bool {
 	return rtn
 }
 
-func readFileDir(dir string) *[]SupplierDir {
+func (b *CsvFileBuilder) ReadAllSupplierDirs(dir string) *[]SupplierDir {
 	var rtn []SupplierDir
 	//fmt.Println("dir: ", dir)
 	files, err := ioutil.ReadDir(dir)
@@ -106,7 +106,7 @@ func readFileDir(dir string) *[]SupplierDir {
 	return &rtn
 }
 
-func readSourceFile(file string) [][]string {
+func (b *CsvFileBuilder) ReadSourceFile(file string) [][]string {
 	sourceFile, err := ioutil.ReadFile(file)
 	if err != nil {
 		log.Println("source file in read err", err)
