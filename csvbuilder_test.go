@@ -6,18 +6,6 @@ import (
 	"testing"
 )
 
-// func TestParseFiles(t *testing.T) {
-// 	var b Builder
-// 	var cb CsvFileBuilder
-// 	b = &cb
-// 	files := b.ParseFiles("./testdir")
-// 	//fmt.Println("source files in parse files", files.Files[0].Content[0])
-// 	fmt.Println("files len in parse files: ", len(files.Files))
-// 	if len(files.Files) < 4 {
-// 		t.Fail()
-// 	}
-// }
-
 func TestAllSupplierDirs(t *testing.T) {
 	var b Builder
 	var cb CsvFileBuilder
