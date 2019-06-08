@@ -2,7 +2,7 @@ package filebuilder
 
 import (
 	"encoding/csv"
-	"fmt"
+	//"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -34,7 +34,7 @@ import (
 func (b *CsvFileBuilder) SaveCartFile(file CartCsvFile) bool {
 	var rtn = false
 	var fileName = b.OutputDir + string(filepath.Separator) + file.SupplierDir + string(filepath.Separator) + file.FileName
-	fmt.Println("output file: ", fileName)
+	//fmt.Println("output file: ", fileName)
 	var path = b.OutputDir + string(filepath.Separator) + file.SupplierDir
 	createDir(path)
 	f, err := createFile(fileName)
