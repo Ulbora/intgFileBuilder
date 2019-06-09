@@ -3,6 +3,7 @@ package filebuilder
 import (
 	"encoding/csv"
 	//"fmt"
+	clr "github.com/Ulbora/csvCleaner"
 	"io/ioutil"
 	"log"
 	"os"
@@ -88,10 +89,14 @@ func (b *CsvFileBuilder) ReadAllSupplierDirs(dir string) *[]SupplierDir {
 
 //ReadSourceFile ReadSourceFile
 func (b *CsvFileBuilder) ReadSourceFile(file string) [][]string {
-	sourceFile, err := ioutil.ReadFile(file)
-	if err != nil {
-		log.Println("source file in read err", err)
-	}
+	var c clr.FileCleaner
+	var csvc clr.CsvFileCleaner
+	c = &csvc
+	//sourceFile, err := ioutil.ReadFile(file)
+	sourceFile := c.CleanFile(file)
+	// if err != nil {
+	// 	log.Println("source file in read err", err)
+	// }
 	r := csv.NewReader(strings.NewReader(string(sourceFile)))
 	records := csvReader(r)
 	//fmt.Println("records", records)
