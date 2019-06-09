@@ -88,15 +88,21 @@ func (b *CsvFileBuilder) ReadAllSupplierDirs(dir string) *[]SupplierDir {
 }
 
 //ReadSourceFile ReadSourceFile
-func (b *CsvFileBuilder) ReadSourceFile(file string) [][]string {
+func (b *CsvFileBuilder) ReadSourceFile(file string, clean bool) [][]string {
 	var c clr.FileCleaner
 	var csvc clr.CsvFileCleaner
 	c = &csvc
-	//sourceFile, err := ioutil.ReadFile(file)
-	sourceFile := c.CleanFile(file)
-	// if err != nil {
-	// 	log.Println("source file in read err", err)
-	// }
+	var sourceFile []byte
+	if clean {
+		sourceFile = c.CleanFile(file)
+	} else {
+		var err error
+		sourceFile, err = ioutil.ReadFile(file)
+		if err != nil {
+			log.Println("source file in read err", err)
+		}
+	}
+
 	r := csv.NewReader(strings.NewReader(string(sourceFile)))
 	records := csvReader(r)
 	//fmt.Println("records", records)

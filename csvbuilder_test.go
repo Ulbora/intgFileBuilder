@@ -17,7 +17,7 @@ func TestAllSupplierDirs(t *testing.T) {
 	if (*res)[0].Files[0].FullName != "./testdir/test1/test11.csv" {
 		t.Fail()
 	}
-	fcont := b.ReadSourceFile((*res)[0].Files[0].FullName)
+	fcont := b.ReadSourceFile((*res)[0].Files[0].FullName, true)
 	fmt.Println("len: ", len(fcont))
 	if len(fcont) == 0 {
 		t.Fail()
@@ -29,7 +29,7 @@ func TestReadSourceFile(t *testing.T) {
 	var b Builder
 	var cb CsvFileBuilder
 	b = &cb
-	res := b.ReadSourceFile("./testdir/test1/test11.csv")
+	res := b.ReadSourceFile("./testdir/test1/test11.csv", true)
 	fmt.Println("len: ", len(res))
 	if len(res) == 0 {
 		t.Fail()
@@ -41,7 +41,7 @@ func TestReadFileBadFile(t *testing.T) {
 	var b Builder
 	var cb CsvFileBuilder
 	b = &cb
-	res := b.ReadSourceFile("./testdir/test1/test11_bad.csv")
+	res := b.ReadSourceFile("./testdir/test1/test11_bad.csv", false)
 	fmt.Println("len: ", len(res))
 	if len(res) != 0 {
 		t.Fail()
@@ -66,7 +66,7 @@ func TestSaveCartFile(t *testing.T) {
 	b = &cb
 	files := b.ReadAllSupplierDirs("./testdir")
 	fmt.Println("AllSupplierDirs: ", files)
-	fcont := b.ReadSourceFile((*files)[0].Files[0].FullName)
+	fcont := b.ReadSourceFile((*files)[0].Files[0].FullName, false)
 	var cf CartCsvFile
 	cf.SupplierDir = "test1"
 	cf.FileName = (*files)[0].Files[0].Name
